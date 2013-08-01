@@ -10,7 +10,7 @@ body {
     font-size: 1em;
     line-height: 1.4;
 		background: #000;
-		color: #555;
+		color: #777;
 }
 
 a {
@@ -37,7 +37,9 @@ hr {
 /* ################################ */
 /*            NAVIGATION            */
 /* ################################ */
-
+#container {
+  height: 40px;
+}
 .navigation {
 	width: 100%;
 	height: 40px;
@@ -53,6 +55,7 @@ hr {
 	background: linear-gradient(to bottom,  #303030 0%,#131313 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#303030', endColorstr='#131313',GradientType=0 );
 	z-index: 999;
+	overflow:hidden;
 }
 
 #menu { display: none; }
@@ -157,7 +160,7 @@ header, #header, #headergen { height: 100%; width: 100%; }
 
 #header {
 	position: relative;
-	background-image:url(../img/bg/slash_it.png);
+	background: #000 url(../img/bg/slash_it.png);
 }
 
 #header h1 {
@@ -198,7 +201,7 @@ header, #header, #headergen { height: 100%; width: 100%; }
 /* ################################ */
 
 #main-container {
-	padding: 10px;
+	padding: 10px 10px 30px 10px;
 	background: #000;
 	-webkit-box-shadow:  0px 0px 10px 10px rgba(0, 0, 0, 0.5);
 	        box-shadow:  0px 0px 10px 10px rgba(0, 0, 0, 0.5);
@@ -207,6 +210,52 @@ header, #header, #headergen { height: 100%; width: 100%; }
 	height: 200px;
 	width: 1px;
 	display: block;
+}
+
+#main-container section {
+	background-image:url(../img/bg/triangles.png);
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #C13B00;
+	padding: 5px 30px;
+	margin-bottom: 25px;
+}
+
+#main-container h2 {
+	font-size: 24px;
+	text-align: center;
+	color: #C13B00;
+	text-transform: uppercase;
+	margin-bottom: 25px;
+}
+
+#main-container h3 {
+	margin: 25px 0px;
+}
+#main-container p {
+	margin: 25px 0px;
+	text-align: center;
+}
+
+#main-container p:first-letter {
+	font-size: 120%;
+	font-weight: bold;
+	color: #777;
+}
+
+#main-container section p {
+	text-align: left;
+}
+
+#main-container .content-image {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 3px solid #111;
 }
 
 /* ################################ */
@@ -247,6 +296,65 @@ footer {
 }
 
 /* ################################ */
+/*              CONTACT             */
+/* ################################ */
+
+#contact-form input {
+	background: none;
+	border-top: none;
+	border-bottom: 1px solid #C13B00;
+	border-right: none;
+	border-left: none;
+	color: #C13B00; 
+}
+#contact-form textarea {
+	background: none;
+	border: 1px solid #C13B00;
+	color: #C13B00;
+	width: 100%;
+	height: 120px;
+	margin-top: 15px;
+	padding: 5px;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+	outline: none;
+}
+#contact-form-submit {
+	float: right;
+	font-size: 22px;
+	color: #C13B00;
+	transition: 1s all ease;
+	margin: 10px 0px 0px 0px;
+}
+#contact-form-submit:hover {
+	color: #FF6600;
+	cursor:pointer;cursor:hand;
+}
+
+#contact-form-msg {
+	margin: 0 auto;
+	width: 75%;
+	font-size: 22px;
+	text-align: center;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color:rgba(0,0,0,0.6);
+	padding: 6px;
+	margin-top: 10px;
+	display: none;
+}
+#contact-form-msg.error {
+	color: #900;
+	display: block!important;
+}
+#contact-form-msg.success {
+	color: #090;
+	display: block!important;
+}
+/* ################################ */
 /*              HELPERS             */
 /* ################################ */
 
@@ -256,6 +364,10 @@ footer {
 
 .pull-left{
 	float:left;
+}
+
+.clear {
+	clear:both;
 }
 
 .fixed-top {
@@ -270,6 +382,14 @@ footer {
 	margin: 0 auto;
 }
 
+.js-hidden {
+	display: none;
+}
+
+.js-show {
+	display: block;
+}
+
 /* ################################ */
 /*          MEDIA QUERY             */
 /* ################################ */
@@ -278,11 +398,28 @@ footer {
 	#menu { display: none; }
 	#menu-mobile { display: block; }
 	.putsy #menu { display: block; }
+	
+	#main-container .content-image {
+		margin: 0px auto 10px auto;
+	}
+	#main-container h3 {
+		text-align: center;
+	}
 }
 
 @media only screen and (min-width: 480px) {
 	#menu { display: block; }
 	#menu-mobile { display: none; }
+}
+
+@media only screen and (min-width: 570px) {
+	#main-container .content-image {
+		float: left;
+		margin: 0px 20px 10px 0px;
+	}
+	#main-container h3 {
+		text-align: left;
+	}
 }
 
 @media only screen and (min-width: 768px) {

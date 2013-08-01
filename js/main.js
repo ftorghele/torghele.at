@@ -303,53 +303,89 @@ $(function(){
 		}	
 	}
 	
-	window.onload = headerApp;
 	
-	$('#menu li:first').attr('class', 'active');
-	$('#menu-mobile ul').remove();
-	
-	['top', 'about', 'work', 'contact'].forEach(function( v,i ) {
-		$("."+v).click(function(e) {
-			 $('html, body').stop().animate({
-					 scrollTop: $("#"+v).offset().top - 38
-			 }, 500);
-			 e.preventDefault();
+	function init() {
+		
+		headerApp();
+		
+		$('.js-remove').remove();
+		$('.js-hidden').attr('class', 'js-show');
+		
+		$('#contact-form-submit').click(function(){
+			
+			$('#contact-form-msg').html('');
+			$('#contact-form-msg').attr('class', '');
+			$('#contact-form-submit').html('sending message <img src="img/load.gif" title="loading.."/>');
+ 
+			$.post("send.php", $("#contact-form").serialize(),  function(response) {
+				if(response==="success") {
+					$('#contact-form-msg').attr('class', 'success');
+					$('#contact-form-msg').html('<i class="icon-ok-sign"></i> Thank you for your message!');
+				} else {
+					$('#contact-form-msg').attr('class', 'error');
+					if(response==="no_name") {
+						$('#contact-form-msg').html('<i class="icon-bolt"></i> Please enter your name to send this message!');
+					} else if(response==="no_mail") {
+						$('#contact-form-msg').html('<i class="icon-bolt"></i> Please enter an valid email address to send this message!');
+					} else if(response==="no_subject") {
+						$('#contact-form-msg').html('<i class="icon-bolt"></i> Please enter a subject to send this message!');
+					} else if(response==="no_message") {
+						$('#contact-form-msg').html('<i class="icon-bolt"></i> Please enter a message!');
+					}
+				}
+				$('#contact-form-submit').html('send message <i class="icon-circle-arrow-right"></i>');
+			});
+			return false;
 		});
-	});
+		
+		$('#menu li:first').attr('class', 'active');
+		$('#menu-mobile ul').remove();
+		
+		['top', 'about', 'work', 'contact'].forEach(function( v,i ) {
+			$("."+v).click(function(e) {
+				 $('html, body').stop().animate({
+						 scrollTop: $("#"+v).offset().top - 38
+				 }, 500);
+				 e.preventDefault();
+			});
+		});
+		
+		// Cache selectors
+		var lastId,
+		topMenu = $("#menu"),
+		topMenuHeight = topMenu.outerHeight(),
+		// All list items
+		menuItems = topMenu.find("a"),
+		// Anchors corresponding to menu items
+		scrollItems = menuItems.map(function(){
+			var item = $($(this).attr("href"));
+			if (item.length) { return item; }
+		});
+		
+		// Bind to scroll
+		$(window).scroll(function(){
+			 // Get container scroll position
+			 var fromTop = $(this).scrollTop()+topMenuHeight;
+			 
+			 // Get id of current scroll item
+			 var cur = scrollItems.map(function(){
+				 if ($(this).offset().top < fromTop)
+					 return this;
+			 });
+			 // Get the id of the current element
+			 cur = cur[cur.length-1];
+			 var id = cur && cur.length ? cur[0].id : "";
+			 
+			 if (lastId !== id) {
+					 lastId = id;
+					 // Set/remove active class
+					 menuItems
+						 .parent().removeClass("active")
+						 .end().filter("[href=#"+id+"]").parent().addClass("active");
+			 }                   
+		});
+	}
 	
-	// Cache selectors
-	var lastId,
-	topMenu = $("#menu"),
-	topMenuHeight = topMenu.outerHeight(),
-	// All list items
-	menuItems = topMenu.find("a"),
-	// Anchors corresponding to menu items
-	scrollItems = menuItems.map(function(){
-		var item = $($(this).attr("href"));
-		if (item.length) { return item; }
-	});
-	
-	// Bind to scroll
-	$(window).scroll(function(){
-		 // Get container scroll position
-		 var fromTop = $(this).scrollTop()+topMenuHeight;
-		 
-		 // Get id of current scroll item
-		 var cur = scrollItems.map(function(){
-			 if ($(this).offset().top < fromTop)
-				 return this;
-		 });
-		 // Get the id of the current element
-		 cur = cur[cur.length-1];
-		 var id = cur && cur.length ? cur[0].id : "";
-		 
-		 if (lastId !== id) {
-				 lastId = id;
-				 // Set/remove active class
-				 menuItems
-					 .parent().removeClass("active")
-					 .end().filter("[href=#"+id+"]").parent().addClass("active");
-		 }                   
-	});
+	window.onload = init;
 		
 }());
