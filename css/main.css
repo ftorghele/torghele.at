@@ -39,6 +39,7 @@ hr {
 /* ################################ */
 #container {
   height: 40px;
+	overflow:hidden;
 }
 .navigation {
 	width: 100%;
@@ -55,7 +56,6 @@ hr {
 	background: linear-gradient(to bottom,  #303030 0%,#131313 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#303030', endColorstr='#131313',GradientType=0 );
 	z-index: 999;
-	overflow:hidden;
 }
 
 #menu { display: none; }
@@ -214,10 +214,10 @@ header, #header, #headergen { height: 100%; width: 100%; }
 
 #main-container section {
 	background-image:url(../img/bg/triangles.png);
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	border: 1px solid #C13B00;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #6f2200;
 	padding: 5px 30px;
 	margin-bottom: 25px;
 }
@@ -252,9 +252,9 @@ header, #header, #headergen { height: 100%; width: 100%; }
 	display: block;
 	margin: 0 auto;
 	text-align: center;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	border: 3px solid #111;
 }
 
